@@ -6,6 +6,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Home from "./screens/home";
 import Profile from "./screens/profile";
 import Order from "./screens/orders";
+import AddService from "./screens/add-service";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -66,6 +67,7 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
+          <Stack.Screen name="AddService" component={AddService} options={noHead} />
           <Stack.Screen
             name="Home"
             component={Home}
