@@ -4,7 +4,7 @@ import { Header } from "../components";
 const Profile = () => {
   return (
     <>
-      <Header title={"Profile"} />
+      <Header title={"Profile"} withBack="true"/>
       <Center flex={1}>
         <Heading>Profile</Heading>
       </Center>

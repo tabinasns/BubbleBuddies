@@ -1,15 +1,15 @@
-import { Heading, Center } from "native-base";
+import { Center, Heading } from "native-base";
 import { Header } from "../components";
 
-const Order = () => {
+const NewsDetail = () => {
   return (
     <>
-      <Header title={"Order"} />
-      <Center flex={1}>
-        <Heading>Order</Heading>
-      </Center>
+      <Header withBack="true" title={"Order"} />
+      <Center flex={1} p={"4"}>
+        <Heading textAlign={"center"}>Order</Heading>
+      </Center> 
     </>
   );
 };
 
-export default Order;
+export default NewsDetail;
