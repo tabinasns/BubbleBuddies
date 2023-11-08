@@ -45,7 +45,7 @@ const Tabs = () => {
           borderTopWidth: 0,
           backgroundColor: "#82a9f4",
         },
-        tabBarLabel: ({ children, color, focused }) => {
+        tabBarLabel: ({ children }) => {
           return (
             <Text color={"white"} mb={2}>
               {children}
@@ -68,6 +68,11 @@ const App = () => {
         <Stack.Navigator>
           <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
           <Stack.Screen name="AddService" component={AddService} options={noHead} />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={noHead}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
