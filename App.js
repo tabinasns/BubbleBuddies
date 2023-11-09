@@ -7,6 +7,7 @@ import Home from "./screens/home";
 import Profile from "./screens/profile";
 import Order from "./screens/orders";
 import AddService from "./screens/add-service";
+import AddList from "./screens/add-list";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -68,6 +69,7 @@ const App = () => {
         <Stack.Navigator>
           <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
           <Stack.Screen name="AddService" component={AddService} options={noHead} />
+          <Stack.Screen name="AddList" component={AddList} options={noHead} />
           <Stack.Screen
             name="Home"
             component={Home}
