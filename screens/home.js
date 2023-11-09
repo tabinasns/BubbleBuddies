@@ -73,7 +73,7 @@ const Home = () => {
           </Heading>
         </Box>
         <Box alignItems="flex-end" top={-35}>
-          <TouchableOpacity onPress={() => navigation.navigate('AddService')}>
+          <TouchableOpacity onPress={() => navigation.navigate('CheckoutOrder')}>
             <Ionicons name="add-circle" size={40} color="#82a9f4" />
           </TouchableOpacity>
         </Box>
