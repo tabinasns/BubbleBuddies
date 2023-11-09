@@ -9,6 +9,7 @@ import Order from "./screens/orders";
 import AddService from "./screens/add-service";
 import AddList from "./screens/add-list";
 import CheckoutOrder from "./screens/checkout-order";
+import AddImage from "./screens/add-image";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -73,6 +74,7 @@ const App = () => {
           <Stack.Screen name="AddList" component={AddList} options={noHead} />
           <Stack.Screen name="Home" component={Home} options={noHead} />
           <Stack.Screen name="CheckoutOrder" component={CheckoutOrder} options={noHead} />
+          <Stack.Screen name="AddImage" component={AddImage} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
