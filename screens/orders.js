@@ -1,11 +1,9 @@
 import { useState} from "react";
-import { Heading, Center, Button, Box, ScrollView, Image, HStack, Text } from "native-base";
+import { Heading, Button, Box, ScrollView, Image, HStack, Text } from "native-base";
 import { useNavigation } from "@react-navigation/native";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { TouchableOpacity } from "react-native";
 import { Header } from "../components"
 
-const Home = () => {
+const Orders = () => {
   const navigation = useNavigation();
   const [isPressed, setIsPressed] = useState(false);
   
@@ -77,4 +75,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Orders;

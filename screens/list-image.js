@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, HStack, Center } from 'native-base';
 import { Header } from '../components';
 
-const Home = () => {
+const ListImage = () => {
   return (
     <>
       <Box bg="#82a9f4">
@@ -24,4 +24,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ListImage;
