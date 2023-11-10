@@ -11,6 +11,8 @@ import AddList from "./screens/add-list";
 import CheckoutOrder from "./screens/checkout-order";
 import AddImage from "./screens/add-image";
 import SuccesOrder from "./screens/succes-order";
+import DetailOrder from "./screens/detail-order";
+import ListImage from "./screens/list-image";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -77,6 +79,8 @@ const App = () => {
           <Stack.Screen name="CheckoutOrder" component={CheckoutOrder} options={noHead} />
           <Stack.Screen name="AddImage" component={AddImage} options={noHead} />
           <Stack.Screen name="SuccesOrder" component={SuccesOrder} options={noHead} />
+          <Stack.Screen name="DetailOrder" component={DetailOrder} options={noHead} />
+          <Stack.Screen name="ListImage" component={ListImage} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
