@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 import { Header } from "../components"
 
-const Home = () => {
+const DetailOrder = () => {
   const navigation = useNavigation();
   const handleButtonPress = () => {
     navigation.navigate('ListImage'); 
@@ -48,4 +48,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default DetailOrder;
