@@ -1,14 +1,14 @@
-import { useState} from "react";
-import { Heading, Button, Box, ScrollView, Image, HStack, Text } from "native-base";
 import { useNavigation } from "@react-navigation/native";
-import { Header } from "../components"
+import { Box, Button, HStack, Heading, Image, ScrollView, Text } from "native-base";
+import { useState } from "react";
+import { Header } from "../components";
 
 const Orders = () => {
   const navigation = useNavigation();
   const [isPressed, setIsPressed] = useState(false);
   
   const handleButtonPress = () => {
-    navigation.navigate('DetailOrder'); // Ganti 'DetailOrder' sesuai dengan nama halaman yang diinginkan
+    navigation.navigate('DetailOrder'); 
   };
 
   const handlePressIn = () => {
@@ -22,7 +22,7 @@ const Orders = () => {
   const buttonStyle = {
     backgroundColor: 'transparent',
     borderWidth: 2,
-    borderColor: '#82a9f4', // Warna garis pinggir tombol
+    borderColor: '#82a9f4', 
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,

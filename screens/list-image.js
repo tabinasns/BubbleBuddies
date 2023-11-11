@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, HStack, Center } from 'native-base';
+import { Box, VStack, HStack, Center, ScrollView } from 'native-base';
 import { Header } from '../components';
 
 const ListImage = () => {
@@ -10,16 +10,50 @@ const ListImage = () => {
           <Header withBack="true" title={'Detail Image'} />
         </Box>
       </Box>
-      <HStack mt={10} space={30} justifyContent="center">
-        <Box>
-          <Center ml={5} h="40" w="40" bg="muted.300" rounded="md" shadow={3} />
-          <Center mt={10} ml={5} h="40" w="40" bg="muted.300" rounded="md" shadow={3} />
-        </Box>
-        <Box>
-          <Center mr={5} h="40" w="40" bg="muted.300" rounded="md" shadow={3} />
-          <Center mt={10} mr={5} h="40" w="40" bg="muted.300" rounded="md" shadow={3} />
-        </Box>
-      </HStack>
+      <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
+        <VStack mb={10} mt={10} space={30} justifyContent="center" alignItems="center">
+          <HStack space={30}>
+            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
+              Gambar 1
+            </Center>
+            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
+              Gambar 2
+            </Center>
+          </HStack>
+          <HStack space={30}>
+            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
+              Gambar 3
+            </Center>
+            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
+              Gambar 4
+            </Center>
+          </HStack>
+          <HStack space={30}>
+            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
+              Gambar 5
+            </Center>
+            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
+              Gambar 6
+            </Center>
+          </HStack>
+          <HStack space={30}>
+            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
+              Gambar 7
+            </Center>
+            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
+              Gambar 8
+            </Center>
+          </HStack>
+          <HStack space={30}>
+            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
+              Gambar 9
+            </Center>
+            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
+              Gambar 10
+            </Center>
+          </HStack>
+        </VStack>
+      </ScrollView>
     </>
   );
 };
