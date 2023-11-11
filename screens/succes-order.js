@@ -38,7 +38,7 @@ const SuccesOrder = () => {
                     </HStack>
                 </Box>
             </Box>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity onPress={() => navigation.navigate('Tabs')}>
                 <Box mt={50} h={38} w={313} borderRadius={10} bg="#82a9f4" justifyContent={"center"} alignItems={"center"} >
                     <Text color={"white"} fs={15} fontWeight={"semibold"}>Close</Text>
                 </Box>
