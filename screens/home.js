@@ -66,7 +66,7 @@ const Home = () => {
           </ScrollView>
         </Box>
       </Box>
-      <Box py={"5"} bg="#f6f6f6" w={"full"} borderRadius={"40"} top={"-40"} pt={"5"} pl={"10"} pr={"10"} pb={"5"}>
+      <Box py={"5"} bg="#f6f6f6" w={"full"} borderRadius={"40"} top={"-40"} pt={"5"} pl={"10"} pr={"10"} pb={"5"} mb={"40"}>
         <Box flexDirection="row" mt={5}>
           <Heading  fontSize={30}>
             My Orders
@@ -165,35 +165,6 @@ const Home = () => {
                 Wash & Iron{"\n"}
                 <Text fontSize={"15"} fontWeight={"500"}>12 Oktober 2023{"\n"}</Text>
                 <Text fontSize={"15"} fontWeight={"500"}>Rp 14.000</Text>
-              </Heading>
-            </HStack>
-          </Box>
-          <Box p={"3"} bgColor="white" mt={"18"} borderRadius={"10"} shadow="2">
-            <HStack>
-              <Image 
-                source={require('../assets/shoes.png')}
-                alt="Alternate Text"
-                size={"60"}
-                m={"3"}
-              />
-              <Heading p={"3"} fontSize={"20"} lineHeight={"25"}>
-                Shoe Clean{"\n"}
-                <Text fontSize={"15"} fontWeight={"500"}>10 Oktober 2023{"\n"}</Text>
-                <Text fontSize={"15"} fontWeight={"500"}>Rp 60.000</Text>
-              </Heading>
-            </HStack>
-          </Box>
-          <Box p={"3"} bgColor="white" mt={"18"} borderRadius={"10"} shadow="2">
-            <HStack>
-              <Image 
-                source={require('../assets/washIron.png')}
-                alt="Alternate Text"
-                size={"79"}
-              />
-              <Heading p={"3"} fontSize={"20"} lineHeight={"25"}>
-                Wash & Iron{"\n"}
-                <Text fontSize={"15"} fontWeight={"500"}>19 Oktober 2023{"\n"}</Text>
-                <Text fontSize={"15"} fontWeight={"500"}>Rp 8.000</Text>
               </Heading>
             </HStack>
           </Box>
