@@ -6,8 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 
-const Register =() => {
-    const [email,setEmail] = useState ("");
+const Lupa =() => {
     const [password,setPassword] = useState("");
 
     const navigation = useNavigation();
@@ -21,49 +20,43 @@ const Register =() => {
                 color:"#373248",
                 fontWeight:"bold",
                 textAlign:"center",
-                paddingBottom:12,
             }}>
-                Login
+                Lupa Password
             </Text>
             <Text style={{
                 textAlign:"center",
                 fontSize:16,
             }}>
-                <Text>Login ke aplikasi <Text style={{color:"#82A9F4"}}>BubbleBudies</Text></Text>
+                <Text>Masukan password baru anda  </Text>
             </Text>
             <VStack pt={8}>
                 <FormControl>
-                    <FormControl.Label>Username / Email</FormControl.Label>
-                    <Input
-                    value={email}
-                    onChangeText={setEmail}
-                    placeholder="Enter Your Email"/>
-                </FormControl>
-                <FormControl>
-                    <FormControl.Label>Password</FormControl.Label>
+                    <FormControl.Label>New Password</FormControl.Label>
                     <Input
                     value={password}
                     onChangeText={setPassword}
-                    placeholder="Enter Your Password"
+                    placeholder="Enter Your New Password"
                     type="password"
                     w={"full"}
                     />
                 </FormControl>
-                <TouchableOpacity onPress={() => navigation.navigate('Lupa') } style={{marginTop:10}}>
-                    <Text style={{
-                        textAlign:"right",
-                        fontWeight:"bold",
-                    }}>
-                        Lupa Password ?
-                    </Text>
-                </TouchableOpacity>
-                <Button mt={6} bg={"#82a9f4"} onPress={handleSubmit}>Login</Button>
+                <FormControl>
+                    <FormControl.Label>New Password</FormControl.Label>
+                    <Input
+                    value={password}
+                    onChangeText={setPassword}
+                    placeholder="Enter Your New Password"
+                    type="password"
+                    w={"full"}
+                    />
+                </FormControl>
+                <Button mt={6} bg={"#82a9f4"} onPress={handleSubmit}>Konfirmasi</Button>
                 <Text style={{
                 textAlign:"center",
                 fontWeight:"bold",
                 marginTop:40
             }}>
-                Atau login dengan 
+                Atau registrasi dengan 
             </Text>
             <View style={{
                 flexDirection:"row",
@@ -124,4 +117,4 @@ const Register =() => {
     )
 }
 
-export default Register;
+export default Lupa;
