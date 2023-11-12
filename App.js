@@ -15,6 +15,8 @@ import Landing from "./screens/landing";
 import Login from "./screens/login";
 import Register from "./screens/register";
 import Lupa from "./screens/lupapswd";
+import DetailOrder from "./screens/detail-order";
+import ListImage from "./screens/list-image";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -85,6 +87,8 @@ const App = () => {
           <Stack.Screen name="Login" component={Login} options={noHead} />
           <Stack.Screen name="Register" component={Register} options={noHead}/>
           <Stack.Screen name="Lupa" component={Lupa} options={noHead}/>
+          <Stack.Screen name="DetailOrder" component={DetailOrder} options={noHead} />
+          <Stack.Screen name="ListImage" component={ListImage} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
