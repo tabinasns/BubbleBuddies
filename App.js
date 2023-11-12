@@ -64,7 +64,7 @@ const Tabs = () => {
         },
       })}
     >
-      <Tab.Screen name="Home" component={landing} options={noHead} />
+      <Tab.Screen name="Home" component={Home} options={noHead} />
       <Tab.Screen name="Order" component={Order} options={noHead} />
       <Tab.Screen name="Profile" component={Profile} options={noHead} />
     </Tab.Navigator>
