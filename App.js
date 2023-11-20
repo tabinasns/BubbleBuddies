@@ -6,6 +6,8 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Home from "./screens/home";
 import Profile from "./screens/profile";
 import Order from "./screens/orders";
+import DetailProfile from "./screens/detail-profile";
+import AboutUs from "./screens/about-us";
 import AddService from "./screens/add-service";
 import AddList from "./screens/add-list";
 import CheckoutOrder from "./screens/checkout-order";
@@ -17,6 +19,7 @@ import Register from "./screens/register";
 import Lupa from "./screens/lupapswd";
 import DetailOrder from "./screens/detail-order";
 import ListImage from "./screens/list-image";
+
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -77,6 +80,8 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Landing">
           <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
+          <Stack.Screen name="DetailProfile" component={DetailProfile} options={noHead} />
+          <Stack.Screen name="AboutUs" component={AboutUs} options={noHead} />
           <Stack.Screen name="AddService" component={AddService} options={noHead} />
           <Stack.Screen name="AddList" component={AddList} options={noHead} />
           <Stack.Screen name="Home" component={Home} options={noHead} />
