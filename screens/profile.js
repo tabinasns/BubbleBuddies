@@ -80,6 +80,10 @@ const Profile = () => {
                 </Center>
             </Modal.Content>
         </Modal>
+      <Header title={"Profile"} withBack="true"/>
+      <Center flex={1}>
+        <Heading>Profile</Heading>
+      </Center>
     </>
   );
 };
