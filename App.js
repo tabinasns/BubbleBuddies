@@ -6,6 +6,8 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Home from "./screens/home";
 import Profile from "./screens/profile";
 import Order from "./screens/orders";
+import DetailProfile from "./screens/detail-profile";
+import AboutUs from "./screens/about-us";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -66,6 +68,8 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
+          <Stack.Screen name="DetailProfile" component={DetailProfile} options={noHead} />
+          <Stack.Screen name="AboutUs" component={AboutUs} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
