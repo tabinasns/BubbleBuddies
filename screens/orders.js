@@ -13,8 +13,8 @@ const Orders = () => {
   const navigation = useNavigation();
   const [showModal, setShowModal] = useState(false);
 
-  const [data, setData] = useState(null); // Data yang akan dimuat
-  const [loading, setLoading] = useState(true); // Status loading
+  const [data, setData] = useState(null); 
+  const [loading, setLoading] = useState(true); 
   
   const handleButtonPress = () => {
     navigation.navigate('DetailOrder'); 
@@ -76,8 +76,8 @@ const Orders = () => {
       <Box py={"4"} bg="#82a9f4">
         <Animated.View  style={{
           height: scrollY.interpolate({
-            inputRange: [scrollContentHeight - window.height, scrollContentHeight], // Sesuaikan dengan rentang yang diinginkan
-            outputRange: [200, 0], // Sesuaikan dengan tinggi header yang diinginkan
+            inputRange: [scrollContentHeight - window.height, scrollContentHeight],
+            outputRange: [200, 0],
             extrapolate: 'clamp',
           }),
         }} >
