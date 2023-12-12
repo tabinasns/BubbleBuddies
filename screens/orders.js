@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { Header } from "../components";
 import DataOrder from "../DataOrder";
 import { TouchableOpacity, ActivityIndicator, RefreshControl, Animated, useWindowDimensions  } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 
 
