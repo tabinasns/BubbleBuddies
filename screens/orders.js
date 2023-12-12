@@ -3,7 +3,7 @@ import { Box, Button, HStack, Heading, Image, ScrollView, Text, Modal } from "na
 import React, { useState, useEffect } from "react";
 import { Header } from "../components";
 import DataOrder from "../DataOrder";
-import { TouchableOpacity, ActivityIndicator, RefreshControl  } from "react-native";
+import { TouchableOpacity, ActivityIndicator, RefreshControl, Animated, useWindowDimensions  } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
@@ -19,6 +19,10 @@ const Orders = () => {
   const handleButtonPress = () => {
     navigation.navigate('DetailOrder'); 
   };
+
+  const [scrollY] = useState(new Animated.Value(0));
+  const window = useWindowDimensions();
+  const scrollContentHeight = 1000;
 
   const buttonStyle = {
     backgroundColor: 'transparent',
@@ -61,21 +65,26 @@ const Orders = () => {
 
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = () => {
-    // Lakukan logika refresh di sini
     setRefreshing(true);
-  
-    // Setelah proses refresh selesai, atur refreshing menjadi false
     setTimeout(() => {
       setRefreshing(false);
-    }, 2000); // contoh: timeout 2 detik untuk simulasi refresh
+    }, 2000); 
   };
   
   return (
     <>
       <Box py={"4"} bg="#82a9f4">
+        <Animated.View  style={{
+          height: scrollY.interpolate({
+            inputRange: [scrollContentHeight - window.height, scrollContentHeight], // Sesuaikan dengan rentang yang diinginkan
+            outputRange: [200, 0], // Sesuaikan dengan tinggi header yang diinginkan
+            extrapolate: 'clamp',
+          }),
+        }} >
         <Box mb={10}>
-        <Header withBack="true" title={"Orders"} />
+        <Header scrollY={scrollY} withBack="true" title={"Orders"} />
         </Box>
+        </Animated.View>
       </Box>
       <Box py={"5"} bg="#f6f6f6" w={"full"} borderRadius={"40"} top={"-40"} pt={"5"} pl={"10"} pr={"10"} pb={"5"}>
         <Box alignItems="flex-start" mt={5} ml={8}>
@@ -95,7 +104,13 @@ const Orders = () => {
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
         
-        <ScrollView vertical={true} showsVerticalScrollIndicator={false} marginBottom={250}     refreshControl={
+        <ScrollView vertical={true}  
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: false }
+        )}
+        scrollEventThrottle={5}
+        showsVerticalScrollIndicator={false} marginBottom={250}  refreshControl={
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
@@ -111,7 +126,7 @@ const Orders = () => {
                   size={"70"}
                   mr={"2"}
                 />
-                <Heading p={"3"} fontSize={"20"} lineHeight={"25"}>
+                <Heading p={"3"} fontSize={20} lineHeight={"25"}>
                   {item.orderan} {"\n"}
                   <Text fontSize={"15"} fontWeight={"500"}>{item.tanggal}{"\n"}</Text>
                   <Text fontSize={"15"} fontWeight={"500"}>Rp {calculateTotalHarga(item)}</Text>
