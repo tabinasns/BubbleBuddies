@@ -1,6 +1,6 @@
 import { Heading, Center, Box, ScrollView, Image, HStack, Text } from "native-base";
 import { useNavigation } from "@react-navigation/native";
-import {Ionicons } from "@expo/vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
 const Home = () => {
