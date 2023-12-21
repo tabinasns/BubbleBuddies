@@ -35,7 +35,7 @@ const CheckoutOrder = () => {
         <Box bg={"#82a9f4"} flex={1}>
             <Header title={"Order List"} withBack="true"/>
             {/* <Box bg="#82a9f4"> */}
-            <Box py={"5"} bg="#f6f6f6" w={"full"} h={"full"} borderTopRadius={"40"}  pt={"5"} pl={"10"} pr={"10"} pb={"5"}>
+            <Box py={"5"} bg="#f6f6f6" w={"full"} h={"full"} borderRadius={"40"} mt={"30"} pt={"10"} pl={"10"} pr={"10"} pb={"30"} mb={"20"}>
                 <Box pb={7} >
                     <Heading pt={5} fontSize={16}>Wash & Iron</Heading>
                 </Box>
@@ -49,7 +49,7 @@ const CheckoutOrder = () => {
                                 mt={2}
                             />
                             <Box p={5}>
-                                <Text pb={2.5} fontWeight={"semibold"} >T-Shirt</Text>
+                                <Text pb={2.5} fontWeight={"bold"} >T-Shirt</Text>
                                 <Text>Rp 2.500 / pcs</Text>
                             </Box>
                             <Box>
@@ -69,7 +69,7 @@ const CheckoutOrder = () => {
                                 mt={2}
                             />
                             <Box p={5}>
-                                <Text pb={2.5} fontWeight={"semibold"} >Blazer</Text>
+                                <Text pb={2.5} fontWeight={"bold"} >Blazer</Text>
                                 <Text>Rp 3.000 / pcs</Text>
                             </Box>
                             <Box>
@@ -81,21 +81,20 @@ const CheckoutOrder = () => {
                         </HStack>
                     </Box>
                 </Box>
-                <TouchableOpacity onPress={() => navigation.navigate('AddService')}>
-                    <Text p={3} color={"#82a9f4"}>Add more order ?</Text>
-                </TouchableOpacity>
-                <Box borderWidth={0.5} p={5} borderRadius={15} borderColor={"black"}>
-                    <Text fontSize={16} fontWeight={"semibold"} pb={3}>Detail Pembayaran</Text>
-                    <HStack>
-                        <Text pr={140} >T-shirt x 2</Text>
+                <Box borderWidth={0.5} mt={10} p={5} borderRadius={15} borderColor={"black"}>
+                    <Text fontSize={16} fontWeight={"bold"} pb={3} style={{ flexDirection: 'row', justifyContent: 'space-between',  marginLeft: 11,marginRight: 11 }}>
+                        Detail Pembayaran
+                    </Text>
+                    <HStack style={{ flexDirection: 'row', justifyContent: 'space-between',  marginLeft: 11, marginRight: 11 }}>
+                        <Text>T-shirt x 2</Text>
                         <Text>Rp 5.000</Text>
                     </HStack>
-                    <HStack>
-                        <Text pr={145} >Blazer x 1</Text>
+                    <HStack style={{ flexDirection: 'row', justifyContent: 'space-between',  marginLeft: 11, marginRight: 11 }}>
+                        <Text>Blazer x 1</Text>
                         <Text>Rp 3.000</Text>
                     </HStack>
-                    <HStack pt={3}>
-                        <Text fontSize={16} fontWeight={"semibold"} pr={70}>Total Pembayaran</Text>
+                    <HStack pt={3} style={{ flexDirection: 'row', justifyContent: 'space-between',  marginLeft: 11, marginRight: 11 }}>
+                        <Text fontSize={16} fontWeight={"bold"}>Total Pembayaran</Text>
                         <Text>Rp 8.000</Text>
                     </HStack>
                 </Box>
