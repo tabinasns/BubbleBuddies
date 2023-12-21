@@ -79,7 +79,7 @@ const AddList = () => {
           <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
             {renderItems}
             <Box py={"4"}>
-              <TouchableOpacity activeOpacity={0.8}>
+              <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('CheckoutOrder')}>
                 <Box py={"2"} bg="#82a9f4" borderRadius={"10"}>
                   <Center>
                     <Heading color="white" fontSize={"20"}>
