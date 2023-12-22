@@ -4,6 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { NativeBaseProvider, Text } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Profile from "./screens/profile";
+import Order from "./screens/orders";
+import DetailProfile from "./screens/detail-profile";
+import AboutUs from "./screens/about-us";
 import AddService from "./screens/add-service";
 import AddList from "./screens/add-list";
 import CheckoutOrder from "./screens/checkout-order";
@@ -17,6 +20,7 @@ import DetailOrder from "./screens/detail-order";
 import ListImage from "./screens/list-image";
 import Orders from "./screens/orders";
 import Home from "./screens/home";
+
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -77,6 +81,8 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Landing">
           <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
+          <Stack.Screen name="DetailProfile" component={DetailProfile} options={noHead} />
+          <Stack.Screen name="AboutUs" component={AboutUs} options={noHead} />
           <Stack.Screen name="AddService" component={AddService} options={noHead} />
           <Stack.Screen name="AddList" component={AddList} options={noHead} />
           <Stack.Screen name="CheckoutOrder" component={CheckoutOrder} options={noHead} />

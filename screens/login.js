@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import { Text, TouchableOpacity } from "react-native";
+import {useState} from "react";
+import {Text, TouchableOpacity} from "react-native";
 import { View, FormControl, Input, VStack, Button,} from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
@@ -57,6 +59,59 @@ const Login = () => {
                     </Text>
                 </TouchableOpacity>
                 <Button mt={6} bg={"#82a9f4"} onPress={handleSubmit}>Login</Button>
+                <Text style={{
+                textAlign:"center",
+                fontWeight:"bold",
+                marginTop:40
+            }}>
+                Atau login dengan 
+            </Text>
+            <View style={{
+                flexDirection:"row",
+                marginHorizontal:"20",
+                marginTop:40
+            }}>
+                <TouchableOpacity style={{
+                    backgroundColor:"#ffffff",
+                    flex:1,
+                    paddingVertical:10,
+                    borderRadius:9,
+                    justifyContent:"center",
+                    alignItems:"center",
+                    marginRight:10,
+                    elevation:2,
+                }}>
+                    <AntDesign name="google" size={30} color="black" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    backgroundColor:"#ffffff",
+                    flex:1,
+                    paddingVertical:10,
+                    borderRadius:9,
+                    justifyContent:"center",
+                    alignItems:"center",
+                    marginRight:10,
+                    elevation:2,
+                }}>
+                    <FontAwesome5 name="facebook" size={30} color="black" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    backgroundColor:"#ffffff",
+                    flex:1,
+                    paddingVertical:10,
+                    borderRadius:9,
+                    justifyContent:"center",
+                    alignItems:"center",
+                    marginRight:10,
+                    elevation:2,
+                }}>
+                    <AntDesign name="apple1" size={30} color="black" />
+                </TouchableOpacity>
+            </View>
+            <TouchableOpacity onPress={() => navigation.navigate('Tabs') }style={{
+                marginTop:20,
+                marginRight:20
+            }}>
                 <Text style={{
                     textAlign:"center",
                     fontWeight:"bold",
