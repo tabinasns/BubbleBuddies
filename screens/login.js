@@ -1,21 +1,49 @@
-import {useState} from "react";
-import {Text, TouchableOpacity} from "react-native";
-import { View, FormControl, Input, VStack, Button,} from "native-base";
+import React, {useState,useEffect} from "react";
+import {Text, TouchableOpacity, Alert} from "react-native";
+import { View, FormControl, Input, VStack, Modal, Button, ScrollView,} from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { FontAwesome5 } from '@expo/vector-icons';
+import { loginUser } from "../src/actions/AuthAction";
 
 
-const Register =() => {
+const Login =() => {
     const [email,setEmail] = useState ("");
     const [password,setPassword] = useState("");
 
+    const [showModal, setShowModal] = useState(false);
+    const [modalContent, setModalContent] = useState("");
+    const tombolDaftar = () => {
+        navigation.navigate("Register")
+    }
     const navigation = useNavigation();
-    const handleSubmit = () => {
-        navigation.navigate("Tabs")
+    const login = () => {
+        if (!email || !password) {
+              toggleModal();
+            }
+          loginUser(email, password)
+            .then((user) => {
+              navigation.replace("Tabs");
+            })
+            .catch((error) => {
+              console.log("Error", error.message);
+              toggleModal();
+            });
+      };
+    const handleBack = () => {
+        navigation.navigate('Landing'); 
     };
+    const toggleModal = () => {
+        setShowModal(!showModal);
+    };
+    const onCloseModal = () => {
+        setShowModal(false);
+    };
+    
     return (
-        <View flex={1} bg={"#f7f6fd"} alignContent={"center"} px={10} pt={20}>
+        <View flex={1} bg={"#f7f6fd"} alignContent={"center"} px={10} pt={20} avoidKeyboard={true}>
+             <TouchableOpacity title="Back to Landing" onPress={handleBack}><Text marginBottom={50} marginTop={-30} ><Ionicons name="arrow-back-outline" size={32} color="#373248" /><Text/></Text></TouchableOpacity>           
             <Text style={{
                 fontSize: 28,
                 color:"#373248",
@@ -25,6 +53,7 @@ const Register =() => {
             }}>
                 Login
             </Text>
+
             <Text style={{
                 textAlign:"center",
                 fontSize:16,
@@ -33,31 +62,25 @@ const Register =() => {
             </Text>
             <VStack pt={8}>
                 <FormControl>
-                    <FormControl.Label>Username / Email</FormControl.Label>
+                    <FormControl.Label>Email</FormControl.Label>
                     <Input
+                    label={"Login"}
                     value={email}
-                    onChangeText={setEmail}
+                    onChangeText={(text) => setEmail(text)}
                     placeholder="Enter Your Email"/>
                 </FormControl>
                 <FormControl>
                     <FormControl.Label>Password</FormControl.Label>
                     <Input
+                    label="Password"
                     value={password}
-                    onChangeText={setPassword}
+                    onChangeText={(text) => setPassword(text)}
                     placeholder="Enter Your Password"
                     type="password"
                     w={"full"}
                     />
                 </FormControl>
-                <TouchableOpacity onPress={() => navigation.navigate('Lupa') } style={{marginTop:10}}>
-                    <Text style={{
-                        textAlign:"right",
-                        fontWeight:"bold",
-                    }}>
-                        Lupa Password ?
-                    </Text>
-                </TouchableOpacity>
-                <Button mt={6} bg={"#82a9f4"} onPress={handleSubmit}>Login</Button>
+                <Button mt={6} bg={"#82a9f4"} type="text" title="Login" onPress={() => login()}>Login</Button>
                 <Text style={{
                 textAlign:"center",
                 fontWeight:"bold",
@@ -107,7 +130,7 @@ const Register =() => {
                     <AntDesign name="apple1" size={30} color="black" />
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('Tabs') }style={{
+            <TouchableOpacity onPress={tombolDaftar} style={{
                 marginTop:20,
                 marginRight:20
             }}>
@@ -116,12 +139,24 @@ const Register =() => {
                     fontWeight:"bold",
                     marginTop:30
                 }}>
-                    Sudah member ? <Text style={{color:"#82A9F4"}}>Login Disini</Text>
+                    Belum member ? <Text style={{color:"#82A9F4"}}>Daftar Disini</Text>
                 </Text>
             </TouchableOpacity>
             </VStack>
+            <Modal isOpen={showModal} onClose={onCloseModal} avoidKeyboard>
+            <Modal.Content>
+              <Modal.CloseButton />
+              <Modal.Header>Login Gagal</Modal.Header>
+              <Modal.Body>
+                <Text>Email atau Password yang anda masukan salah!</Text>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onPress={toggleModal}>Close</Button>
+              </Modal.Footer>
+            </Modal.Content>
+          </Modal>
         </View>
     )
 }
 
-export default Register;
+export default Login;
