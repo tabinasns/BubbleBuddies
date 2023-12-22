@@ -1,5 +1,5 @@
 import { Text, Image, Box, Center } from 'native-base';
-import { TouchableOpacity, SafeAreaView } from 'react-native';
+import { TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const Landing = () => {
