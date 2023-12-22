@@ -1,11 +1,11 @@
-import { Heading, Center, Box, ScrollView, Image, HStack, Text } from "native-base";
+import { Heading, Box, ScrollView, Image, HStack, Text } from "native-base";
 import { useNavigation } from "@react-navigation/native";
+import {Ionicons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
 const Home = () => {
   const navigation = useNavigation();
-
   return (
     <>
       <Box py={"4"} bg="#82a9f4">

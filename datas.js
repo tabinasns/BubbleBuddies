@@ -22,21 +22,7 @@ const datas = [
     image:
       "https://i.pinimg.com/originals/94/f9/b3/94f9b3818464bd292bc24a3a8acf067a.png",
   },
-  {
-    id: 4,
-    type: "Bottom",
-    price: "Rp 4.000 / pcs",
-    image:
-      "https://i.pinimg.com/originals/3c/74/58/3c7458869ee918b90f5649a44d41f46f.png",
-  },
-  {
-    id: 5,
-    type: "Shoes",
-    price:
-      "Rp 25.000 / pcs",
-    image:
-      "https://i.pinimg.com/736x/7b/4d/4d/7b4d4dc6c88e9f636b2a1612d36a34b6.jpg",
-  },
+  
 ];
 
 export default datas;
