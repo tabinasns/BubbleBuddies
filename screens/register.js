@@ -1,8 +1,6 @@
 import React, {useState} from "react";
-import {Text, TouchableOpacity, SafeAreaView} from "react-native";
-import {  View, FormControl, Input, VStack, Button, Box, Modal, ModalBackdrop, AlertText, Alert, ScrollView } from "native-base";
 import {Text, TouchableOpacity} from "react-native";
-import { View, FormControl, Input, VStack, Button,} from "native-base";
+import { KeyboardAvoidingView, View, HStack, Heading, FormControl, Input, VStack, Button, Box, Modal, ModalBackdrop, AlertText, Alert, ScrollView } from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { AntDesign } from '@expo/vector-icons';
@@ -71,144 +69,142 @@ const Register =() => {
     const isPasswordValid = password.length >= 6;
 
     return (
-        <SafeAreaView>
-            <View flex={1} bg={"#f7f6fd"} alignContent={"center"} px={10} pt={20}>
-                <TouchableOpacity title="Back to Landing" onPress={handleBack}><Text marginBottom={50} marginTop={-30} ><Ionicons name="arrow-back-outline" size={32} color="#373248" /><Text/></Text></TouchableOpacity> 
-                <ScrollView vertical={true} showsVerticalScrollIndicator={false}>        
-                <Text style={{
-                    fontSize: 28,
-                    color:"#373248",
-                    fontWeight:"bold",
-                    textAlign:"center",
-                    paddingBottom:12,
-                }}>
-                    Register
-                </Text>
+        <View flex={1} bg={"#f7f6fd"} alignContent={"center"} px={10} pt={20}>
+            <TouchableOpacity title="Back to Landing" onPress={handleBack}><Text marginBottom={50} marginTop={-30} ><Ionicons name="arrow-back-outline" size={32} color="#373248" /><Text/></Text></TouchableOpacity> 
+            <ScrollView vertical={true} showsVerticalScrollIndicator={false}>        
+            <Text style={{
+                fontSize: 28,
+                color:"#373248",
+                fontWeight:"bold",
+                textAlign:"center",
+                paddingBottom:12,
+            }}>
+                Register
+            </Text>
 
-                <Text style={{
-                    textAlign:"center",
-                    fontSize:16,
-                }}>
-                    <Text>Silahkan Masukkan Data Diri Anda</Text>
-                </Text>
-                <VStack pt={8}>
+            <Text style={{
+                textAlign:"center",
+                fontSize:16,
+            }}>
+                  <Text>Silahkan Masukkan Data Diri Anda</Text>
+            </Text>
+            <VStack pt={8}>
 
-                    <FormControl>
-                        <FormControl.Label>Username / Nama</FormControl.Label>
-                            <Input
-                            value={username}
-                            onChangeText={(username) => setUsername(username)}
-                            placeholder="Enter Your Username"/>
-                        <FormControl.Label>Password</FormControl.Label>
-                            <Input
-                            value={password}
-                            onChangeText={(password) => setPassword(password)}
-                            placeholder="Enter Your Password"
-                            type="password"/>
-                            {password.length < 6 && (
-                            <Text style={{ color: 'red' }}>
-                                Password should be at least 6 characters long.
-                            </Text>
-                            )}
-                        <FormControl.Label>Email</FormControl.Label>
-                            <Input
-                            value={email}
-                            onChangeText={(email) => setEmail(email)}
-                            placeholder="Enter Your Email"
-                            w={"full"}/>
-                        <FormControl.Label>No Telp</FormControl.Label>
-                            <Input
-                            value={telp}
-                            onChangeText={(telp) => setTelp(telp)}
-                            placeholder="Enter Your Phone Number"
-                            keyboardType="phone-pad"
-                            w={"full"}/>
-                        <FormControl.Label>Alamat</FormControl.Label>
-                            <Input
-                            value={alamat}
-                            onChangeText={(alamat) => setAlamat(alamat)}
-                            placeholder="Enter Your Address"
-                            w={"full"}/>
-                    </FormControl>
-                    <Box>
-                        <Button  mt={6} bg={"#82a9f4"} title="Register" onPress={() => {onRegister();}}>Registrasi</Button>
-                        <Text style={{
-                            textAlign:"center",
-                            fontWeight:"bold",
-                            marginTop:40}}>
-                            Atau login dengan 
+                <FormControl>
+                    <FormControl.Label>Username / Nama</FormControl.Label>
+                        <Input
+                        value={username}
+                        onChangeText={(username) => setUsername(username)}
+                        placeholder="Enter Your Username"/>
+                    <FormControl.Label>Password</FormControl.Label>
+                        <Input
+                        value={password}
+                        onChangeText={(password) => setPassword(password)}
+                        placeholder="Enter Your Password"
+                        type="password"/>
+                        {password.length < 6 && (
+                        <Text style={{ color: 'red' }}>
+                            Password should be at least 6 characters long.
                         </Text>
-                        <Modal isOpen={showModal} onClose={onCloseModal}>
-                            <Modal.Content>
-                            <Modal.CloseButton />
-                            <Modal.Header>{modalContent.title}</Modal.Header>
-                            <Modal.Body>
-                                <Text>{modalContent.message}</Text>
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button onPress={onCloseModal}>Tutup</Button>
-                            </Modal.Footer>
-                            </Modal.Content>
-                        </Modal>
-                    </Box>
-                <View style={{
-                    flexDirection:"row",
-                    marginHorizontal:"20",
-                    marginTop:40
-                }}>
-                    <TouchableOpacity style={{
-                        backgroundColor:"#ffffff",
-                        flex:1,
-                        paddingVertical:10,
-                        borderRadius:9,
-                        justifyContent:"center",
-                        alignItems:"center",
-                        marginRight:10,
-                        elevation:2,
-                    }}>
-                        <AntDesign name="google" size={30} color="black" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{
-                        backgroundColor:"#ffffff",
-                        flex:1,
-                        paddingVertical:10,
-                        borderRadius:9,
-                        justifyContent:"center",
-                        alignItems:"center",
-                        marginRight:10,
-                        elevation:2,
-                    }}>
-                        <FontAwesome5 name="facebook" size={30} color="black" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{
-                        backgroundColor:"#ffffff",
-                        flex:1,
-                        paddingVertical:10,
-                        borderRadius:9,
-                        justifyContent:"center",
-                        alignItems:"center",
-                        marginRight:10,
-                        elevation:2,
-                    }}>
-                        <AntDesign name="apple1" size={30} color="black" />
-                    </TouchableOpacity>
-                </View>
-                <TouchableOpacity onPress={() => navigation.navigate('Login') }style={{
-                    marginTop:20,
-                    marginRight:20
-                }}>
+                        )}
+                    <FormControl.Label>Email</FormControl.Label>
+                        <Input
+                        value={email}
+                        onChangeText={(email) => setEmail(email)}
+                        placeholder="Enter Your Email"
+                        w={"full"}/>
+                    <FormControl.Label>No Telp</FormControl.Label>
+                        <Input
+                        value={telp}
+                        onChangeText={(telp) => setTelp(telp)}
+                        placeholder="Enter Your Phone Number"
+                        keyboardType="phone-pad"
+                        w={"full"}/>
+                    <FormControl.Label>Alamat</FormControl.Label>
+                        <Input
+                        value={alamat}
+                        onChangeText={(alamat) => setAlamat(alamat)}
+                        placeholder="Enter Your Address"
+                        w={"full"}/>
+                </FormControl>
+                <Box>
+                    <Button  mt={6} bg={"#82a9f4"} title="Register" onPress={() => {onRegister();}}>Registrasi</Button>
                     <Text style={{
                         textAlign:"center",
                         fontWeight:"bold",
-                        marginTop:30
-                    }}>
-                        Sudah member ? <Text style={{color:"#82A9F4"}}>Login Disini</Text>
+                        marginTop:40}}>
+                        Atau login dengan 
                     </Text>
+                    <Modal isOpen={showModal} onClose={onCloseModal}>
+                        <Modal.Content>
+                        <Modal.CloseButton />
+                        <Modal.Header>{modalContent.title}</Modal.Header>
+                        <Modal.Body>
+                            <Text>{modalContent.message}</Text>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onPress={onCloseModal}>Tutup</Button>
+                        </Modal.Footer>
+                        </Modal.Content>
+                    </Modal>
+                </Box>
+            <View style={{
+                flexDirection:"row",
+                marginHorizontal:"20",
+                marginTop:40
+            }}>
+                <TouchableOpacity style={{
+                    backgroundColor:"#ffffff",
+                    flex:1,
+                    paddingVertical:10,
+                    borderRadius:9,
+                    justifyContent:"center",
+                    alignItems:"center",
+                    marginRight:10,
+                    elevation:2,
+                }}>
+                    <AntDesign name="google" size={30} color="black" />
                 </TouchableOpacity>
-                </VStack>
-                </ScrollView>  
+                <TouchableOpacity style={{
+                    backgroundColor:"#ffffff",
+                    flex:1,
+                    paddingVertical:10,
+                    borderRadius:9,
+                    justifyContent:"center",
+                    alignItems:"center",
+                    marginRight:10,
+                    elevation:2,
+                }}>
+                    <FontAwesome5 name="facebook" size={30} color="black" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    backgroundColor:"#ffffff",
+                    flex:1,
+                    paddingVertical:10,
+                    borderRadius:9,
+                    justifyContent:"center",
+                    alignItems:"center",
+                    marginRight:10,
+                    elevation:2,
+                }}>
+                    <AntDesign name="apple1" size={30} color="black" />
+                </TouchableOpacity>
             </View>
-        </SafeAreaView>
+            <TouchableOpacity onPress={() => navigation.navigate('Login') }style={{
+                marginTop:20,
+                marginRight:20
+            }}>
+                <Text style={{
+                    textAlign:"center",
+                    fontWeight:"bold",
+                    marginTop:30
+                }}>
+                    Sudah member ? <Text style={{color:"#82A9F4"}}>Login Disini</Text>
+                </Text>
+            </TouchableOpacity>
+            </VStack>
+            </ScrollView>  
+        </View>
     )
 }
 
