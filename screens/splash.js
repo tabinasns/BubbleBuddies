@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native'
 import React, { Component } from 'react'
+import IconLogo from '../assets/iconlogo'
 import { getData } from '../src/utils'
 import { Text, Spinner } from 'native-base'
 
@@ -20,7 +21,7 @@ export default class Splash extends Component {
         return (
             <View style={styles.pages}>
                 <Text color="#82A9F4" fontSize={32} fontWeight={"bold"} pt={2}>
-                    BubbleBuddies
+                     BubbleBuddies
                 </Text>
                 <Spinner color={"#82a9f4"} size="lg" />
             </View>
