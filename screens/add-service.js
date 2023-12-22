@@ -40,14 +40,14 @@ const AddService = () => {
             <Box w="full" bgColor="white" p={"5"} borderRadius={"10"} shadow="2" mt={"7"}>
               <HStack>
                 <Image 
-                  source={require('../assets/shoes.png')}
+                  source={require('../assets/wash.png')}
                   alt="Alternate Text"
                   size={"60"}
                   ml={"3"}
                   mt={"2"}
                 />
                 <Heading p={"6"} fontWeight={"500"}>
-                  Shoe Cleaning
+                  Wash
                 </Heading>
               </HStack>
             </Box>

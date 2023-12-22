@@ -12,8 +12,8 @@ const AddList = () => {
 
   const renderitem = ({ item, index }) => {
     return (
-      <Box>
-        <Box borderRadius={"10"} shadow={"1"} mb={5} key={item.id} bgColor={"white"}>
+      <Box key={item.id}>
+        <Box borderRadius={"10"} shadow={"1"} mb={5} bgColor={"white"}>
           <HStack>
             <Box flexDirection="row">
               <Image
@@ -51,18 +51,15 @@ const AddList = () => {
     );
   };
 
-  // Menginisialiasi array counter sesuai dengan jumlah data pada array datas
   const initialCounters = new Array(datas.length).fill(0);
   const [counters, setCounters] = useState(initialCounters);
 
-  // Function increment untuk tiap item
   const handleIncrement = (index) => {
     const newCounters = [...counters];
     newCounters[index] += 1;
     setCounters(newCounters);
   }
 
-  // Function decrement untuk tiap item
   const handleDecrement = (index) => {
     const newCounters = [...counters];
     newCounters[index] -= 1;
@@ -72,17 +69,15 @@ const AddList = () => {
     setCounters(newCounters);
   }
 
+  const renderItems = datas.map((item, index) => renderitem({ item, index }));
+
   return (
     <>
       <Header title={"Add List"} withBack={true} />
       <Box py={"4"} bg="#82a9f4">
         <Box py={"5"} bg="#f6f6f6" w={"full"} borderRadius={"40"} mt={"30"} pt={"10"} pl={"10"} pr={"10"} pb={"30"} mb={"20"}>
           <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
-            <FlatList
-              data={datas}
-              renderItem={renderitem}
-              keyExtractor={(item) => item.id}
-            />
+            {renderItems}
             <Box py={"4"}>
               <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('CheckoutOrder')}>
                 <Box py={"2"} bg="#82a9f4" borderRadius={"10"}>
@@ -96,8 +91,7 @@ const AddList = () => {
             </Box>
           </ScrollView>
         </Box>
-      </Box>  
-
+      </Box>
     </>
   );
 };

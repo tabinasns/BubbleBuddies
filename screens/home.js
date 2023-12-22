@@ -1,6 +1,7 @@
 import { Heading, Box, ScrollView, Image, HStack, Text } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import {Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
 const Home = () => {
@@ -51,14 +52,14 @@ const Home = () => {
           <Box w={170} bgColor="white" p={"3"} borderRadius={"10"} shadow="2" ml={5} mr={5}>
             <HStack>
               <Image 
-                source={require('../assets/shoes.png')}
+                source={require('../assets/wash.png')}
                 alt="Alternate Text"
                 size={"50"}
                 my={"2"}
                 mx={"2"}
               />
-              <Heading p={"3"} fontSize={"18"} fontWeight={"500"}>
-                Shoe{"\n"}Cleaning
+              <Heading p={"5"} fontSize={"18"} fontWeight={"500"}>
+                Wash
               </Heading>
             </HStack>
           </Box>
@@ -110,13 +111,13 @@ const Home = () => {
           <Box p={"3"} bgColor="white" mt={"18"} borderRadius={"10"} shadow="2">
             <HStack>
               <Image 
-                source={require('../assets/shoes.png')}
+                source={require('../assets/wash.png')}
                 alt="Alternate Text"
                 size={"60"}
                 m={"3"}
               />
               <Heading p={"3"} fontSize={"20"} lineHeight={"25"}>
-                Shoe Clean{"\n"}
+                Wash{"\n"}
                 <Text fontSize={"15"} fontWeight={"500"}>16 Oktober 2023{"\n"}</Text>
                 <Text fontSize={"15"} fontWeight={"500"}>Rp 30.000</Text>
               </Heading>
