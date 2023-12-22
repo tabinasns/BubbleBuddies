@@ -18,9 +18,9 @@ import Register from "./screens/register";
 import Lupa from "./screens/lupapswd";
 import DetailOrder from "./screens/detail-order";
 import ListImage from "./screens/list-image";
+import Splash from "./screens/splash";
 import Orders from "./screens/orders";
 import Home from "./screens/home";
-
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -79,7 +79,7 @@ const App = () => {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Landing">
+        <Stack.Navigator initialRouteName="Splash">
           <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
           <Stack.Screen name="DetailProfile" component={DetailProfile} options={noHead} />
           <Stack.Screen name="AboutUs" component={AboutUs} options={noHead} />
@@ -94,6 +94,8 @@ const App = () => {
           <Stack.Screen name="Lupa" component={Lupa} options={noHead}/>
           <Stack.Screen name="DetailOrder" component={DetailOrder} options={noHead} />
           <Stack.Screen name="ListImage" component={ListImage} options={noHead} />
+          <Stack.Screen name="Splash" component={Splash} options={noHead} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
