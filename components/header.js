@@ -6,7 +6,6 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
 const Header = ({ title, withBack = false }) => {
-  
   const navigation = useNavigation();
   return (
     <SafeAreaView>
@@ -36,5 +35,4 @@ const Header = ({ title, withBack = false }) => {
     </SafeAreaView>
   );
 };
-
 export default Header;

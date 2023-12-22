@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { NativeBaseProvider, Text } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Home from "./screens/home";
 import Profile from "./screens/profile";
 import Order from "./screens/orders";
 import DetailProfile from "./screens/detail-profile";
@@ -20,7 +19,8 @@ import Lupa from "./screens/lupapswd";
 import DetailOrder from "./screens/detail-order";
 import ListImage from "./screens/list-image";
 import Splash from "./screens/splash";
-
+import Orders from "./screens/orders";
+import Home from "./screens/home";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -69,7 +69,7 @@ const Tabs = () => {
       })}
     >
       <Tab.Screen name="Home" component={Home} options={noHead} />
-      <Tab.Screen name="Order" component={Order} options={noHead} />
+      <Tab.Screen name="Orders" component={Orders} options={noHead} />
       <Tab.Screen name="Profile" component={Profile} options={noHead} />
     </Tab.Navigator>
   );
@@ -85,7 +85,6 @@ const App = () => {
           <Stack.Screen name="AboutUs" component={AboutUs} options={noHead} />
           <Stack.Screen name="AddService" component={AddService} options={noHead} />
           <Stack.Screen name="AddList" component={AddList} options={noHead} />
-          <Stack.Screen name="Home" component={Home} options={noHead} />
           <Stack.Screen name="CheckoutOrder" component={CheckoutOrder} options={noHead} />
           <Stack.Screen name="AddImage" component={AddImage} options={noHead} />
           <Stack.Screen name="SuccesOrder" component={SuccesOrder} options={noHead} />
