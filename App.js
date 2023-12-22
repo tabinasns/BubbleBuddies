@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { NativeBaseProvider, Text } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Profile from "./screens/profile";
-import Order from "./screens/orders";
 import DetailProfile from "./screens/detail-profile";
 import AboutUs from "./screens/about-us";
 import AddService from "./screens/add-service";
@@ -15,7 +14,6 @@ import SuccesOrder from "./screens/succes-order";
 import Landing from "./screens/landing";
 import Login from "./screens/login";
 import Register from "./screens/register";
-import Lupa from "./screens/lupapswd";
 import DetailOrder from "./screens/detail-order";
 import ListImage from "./screens/list-image";
 import Splash from "./screens/splash";
@@ -91,7 +89,6 @@ const App = () => {
           <Stack.Screen name="Landing" component={Landing} options={noHead} />
           <Stack.Screen name="Login" component={Login} options={noHead} />
           <Stack.Screen name="Register" component={Register} options={noHead}/>
-          <Stack.Screen name="Lupa" component={Lupa} options={noHead}/>
           <Stack.Screen name="DetailOrder" component={DetailOrder} options={noHead} />
           <Stack.Screen name="ListImage" component={ListImage} options={noHead} />
           <Stack.Screen name="Splash" component={Splash} options={noHead} />
