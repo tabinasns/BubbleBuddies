@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, {useState} from "react";
 import {Text, TouchableOpacity} from "react-native";
 import { View, FormControl, Input, VStack, Button,} from "native-base";
 import { useNavigation } from '@react-navigation/native';
