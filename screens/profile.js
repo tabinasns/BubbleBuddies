@@ -69,7 +69,11 @@ const Profile = () => {
 
           <Ionicons name="person-circle" size={90} color="grey"></Ionicons>
             <Box>
+
+              <Heading alignItems={"center"} mt="8" marginTop={5} >Andre Maulana</Heading>
+
               <Heading alignItems={"center"} mt="8" marginTop={5} >{profile?.username}</Heading>
+
               <TouchableOpacity onPress={()=> navigation.navigate("DetailProfile")}>
                 <Box backgroundColor="#82a9f4" height={7} width={120} borderRadius={10} mt={2}>
                   <Text color={"white"} fontSize={18} textAlign="center">Detail</Text>
@@ -79,20 +83,20 @@ const Profile = () => {
           </HStack>
 
         <TouchableOpacity onPress={()=> navigation.navigate("AboutUs")}>
-          <Box p={1} backgroundColor="#FFFFFF" height={16} width={300} borderRadius={12} alignSelf="center" mt={20}>
-            <Ionicons size={33} color="#82a9f4" name="information-circle-outline">
+          <Box p={1} backgroundColor="#FFFFFF" height={16} width={300} borderRadius={10} alignSelf="center" mt={20}>
+            <Ionicons size={33} color="#82a9f4"  name="information-circle-outline" style={{ marginLeft: 20 }}>
               <Box>
-                <Text color={"#82a9f4"} fontSize={25} fontWeight={"bold"} mt={2} ml={8}>About Us</Text>
+                <Text color={"#82a9f4"} fontSize={25} fontWeight={"semibold"} mt={2} ml={8}>About Us</Text> 
               </Box>
             </Ionicons>
           </Box>
         </TouchableOpacity>
 
        <TouchableOpacity onPress={handleLogOut}>
-           <Box p={1} backgroundColor="#FFFFFF" height={16} width={300} borderRadius={12} alignSelf="center" mt={5}>
-             <Ionicons size={33} color="#82a9f4" name="log-out-outline">
+           <Box p={1} backgroundColor="#FFFFFF" height={16} width={300} borderRadius={10} alignSelf="center" mt={5}>
+             <Ionicons size={33} color="#82a9f4" name="log-out-outline" style={{ marginLeft: 20}}>
                 <Box>
-                  <Text color={"#82a9f4"} fontSize={25} fontWeight={"bold"} mt={2} ml={8}>Logout</Text>
+                  <Text color={"#82a9f4"} fontSize={25} fontWeight={"semibold"} mt={2} ml={8}>Logout</Text>
                 </Box>
               </Ionicons>
           </Box>

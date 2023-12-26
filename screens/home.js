@@ -1,9 +1,14 @@
 import { Heading, Box, ScrollView, Image, HStack, Text } from "native-base";
 import { useNavigation } from "@react-navigation/native";
+
+import {Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
+
 import { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons/";
 import { SafeAreaView, TouchableOpacity } from "react-native";
 import { getData } from "../src/utils/localStorage";
+
 
 const Home = () => {
   const navigation = useNavigation();

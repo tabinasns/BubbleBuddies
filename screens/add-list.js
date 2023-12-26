@@ -73,6 +73,25 @@ const AddList = () => {
 
   return (
     <>
+
+      <Header title={"Add List"} withBack={true} />
+      <Box py={"4"} bg="#82a9f4">
+        <Box py={"5"} bg="#f6f6f6" w={"full"} borderRadius={"40"} mt={"30"} pt={"10"} pl={"10"} pr={"10"} pb={"30"} mb={"20"}>
+          <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
+            <FlatList
+              data={datas}
+              renderItem={renderitem}
+              keyExtractor={(item) => item.id}
+            />
+            <Box py={"4"}>
+              <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('CheckoutOrder')}>
+                <Box py={"2"} bg="#82a9f4" borderRadius={"10"}>
+                  <Center>
+                    <Heading color="white" fontSize={"20"}>
+                      Next
+                    </Heading>
+                  </Center>
+
       <SafeAreaView>
           <Box bg={"#82a9f4"}>
             <Header title={"Add List"} withBack={true} />
@@ -89,6 +108,7 @@ const AddList = () => {
                       </Center>
                     </Box>
                   </TouchableOpacity>
+
                 </Box>
               </ScrollView>
             </Box>

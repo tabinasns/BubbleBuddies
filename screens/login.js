@@ -18,6 +18,10 @@ const Login =() => {
         navigation.navigate("Register")
     }
     const navigation = useNavigation();
+
+    const handleSubmit = () => {
+        navigation.navigate("Tabs")
+
     const login = () => {
         if (!email || !password) {
               toggleModal();
@@ -33,6 +37,7 @@ const Login =() => {
       };
     const handleBack = () => {
         navigation.navigate('Landing'); 
+
     };
     const toggleModal = () => {
         setShowModal(!showModal);
@@ -130,7 +135,11 @@ const Login =() => {
                     <AntDesign name="apple1" size={30} color="black" />
                 </TouchableOpacity>
             </View>
+
+            <TouchableOpacity onPress={() => navigation.navigate('Tabs') }style={{
+
             <TouchableOpacity onPress={tombolDaftar} style={{
+
                 marginTop:20,
                 marginRight:20
             }}>
