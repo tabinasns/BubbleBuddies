@@ -31,11 +31,10 @@ const datas = [
   },
   {
     id: 5,
-    type: "Shoes",
-    price:
-      "Rp 25.000 / pcs",
+    type: "Blanket",
+    price: "Rp 6.000 / pcs",
     image:
-      "https://i.pinimg.com/736x/7b/4d/4d/7b4d4dc6c88e9f636b2a1612d36a34b6.jpg",
+      "https://i.pinimg.com/736x/b9/63/ae/b963ae7da4aaeea35cbbd94bb5109e72.jpg",
   },
 ];
 
