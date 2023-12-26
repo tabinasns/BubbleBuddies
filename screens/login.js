@@ -12,7 +12,7 @@ const Register =() => {
 
     const navigation = useNavigation();
     const handleSubmit = () => {
-        navigation.navigate("Login")
+        navigation.navigate("Tabs")
     };
     return (
         <View flex={1} bg={"#f7f6fd"} alignContent={"center"} px={10} pt={20}>
@@ -107,7 +107,7 @@ const Register =() => {
                     <AntDesign name="apple1" size={30} color="black" />
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('Login') }style={{
+            <TouchableOpacity onPress={() => navigation.navigate('Tabs') }style={{
                 marginTop:20,
                 marginRight:20
             }}>
