@@ -54,6 +54,30 @@ export const logoutUser = () => {
     });
 };
 
+export const getOrder = async () => {
+  const userData = await getData("user");
+  const orderRef = FIREBASE.database().ref("orders/" + userData.uid);
+
+  return orderRef
+    .once("value")
+    .then((snapshot) => {
+      const orderData = snapshot.val();
+      if (orderData) {
+        const orderArray = Object.entries(orderData).map(([orderId, orderData]) => ({
+          orderId,
+          ...orderData,
+        }));
+        return orderArray;
+      } else {
+        return [];
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching user Order:", error);
+      return [];
+    });
+};
+
 export const addNote = async (data) => {
   try {
     // Ambil data yg sudah login dari fungsi 'getData'
