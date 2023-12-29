@@ -68,20 +68,28 @@ const AddList = () => {
 
   const saveListOrder = async () => {
     try {
+      // Periksa apakah semua quantity adalah 0
+      const isQuantityEmpty = defaultProducts.every(product => product.quantity === 0);
+  
+      if (isQuantityEmpty) {
+        // Jika semua quantity kosong, tampilkan alert
+        Alert.alert('Quantity kosong', 'Tambahkan quantity');
+        return; // Berhenti proses menyimpan jika quantity kosong
+      }
+  
       // Persiapkan data untuk disimpan
-      
       const dataToSave = {
         service: selectedService,
         products: defaultProducts.filter(product => product.quantity > 0),
-         // Hanya simpan produk dengan quantity > 0
+        // Hanya simpan produk dengan quantity > 0
       };
-
+  
       // Simpan data ke AsyncStorage
       await AsyncStorage.setItem('orderData', JSON.stringify(dataToSave));
-
+  
       // Tampilkan pesan bahwa data berhasil disimpan
-      console.log('Data terbaru', dataToSave)
-      navigation.replace("CheckoutOrder");
+      console.log('Data terbaru', dataToSave);
+      navigation.replace('CheckoutOrder');
     } catch (error) {
       console.error('Error saving order data:', error);
     }
@@ -130,7 +138,7 @@ const AddList = () => {
                     </Box>
                     <Box>
                       <Text fontSize={"sm"} pl={"6"} pb={"6"}>
-                        Rp. {product.price}
+                        Rp {product.price} /pcs
                       </Text>
                     </Box>
                   </VStack>
