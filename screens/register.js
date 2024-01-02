@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import {Text, TouchableOpacity} from "react-native";
-import { KeyboardAvoidingView, View, HStack, Heading, FormControl, Input, VStack, Button, Box, Modal, ModalBackdrop, AlertText, Alert, ScrollView } from "native-base";
+import { KeyboardAvoidingView, Form, Select, View, HStack, Heading, FormControl, Input, VStack, Button, Box, Modal, ModalBackdrop, AlertText, Alert, ScrollView } from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { AntDesign } from '@expo/vector-icons';
@@ -27,14 +27,29 @@ const Register =() => {
         title: "",
         message: "",
       });
+     
       const onRegister = async () => {
         if (email && password.length >= 6) {
+            if (!selectedProvinceName || !selectedRegencyName || !selectedDistrictName || !selectedVillageName) {
+                setModalContent({
+                  title: "Data Tidak Lengkap",
+                  message: "Mohon lengkapi data alamat sebelum melakukan registrasi.",
+                });
+                toggleModal();
+                return; 
+              }
+            const alamatData = [alamat, selectedProvinceName, selectedRegencyName, selectedDistrictName, selectedVillageName]
+            .filter((value) => value !== null && value !== undefined)
+            .join(', '); 
+
+        
           const data = {
             email: email,
             username: username,
-            alamat: alamat,
+            alamat: alamatData,
             telp: telp,
             status: "user",
+            
           };
     
           try {
@@ -68,6 +83,67 @@ const Register =() => {
 
     const isPasswordValid = password.length >= 6;
 
+    const [provinces, setProvinces] = useState([]);
+    const [selectedProvince, setSelectedProvince] = useState(null);
+    const [regencies, setRegencies] = useState([]);
+    const [selectedRegency, setSelectedRegency] = useState(null);
+    const [districts, setDistricts] = useState([]);
+    const [selectedDistrict, setSelectedDistrict] = useState(null);
+    const [villages, setVillages] = useState([]);
+    const [selectedVillage, setSelectedVillage] = useState(null);
+  
+    useEffect(() => {
+      // Fetch data for provinces on component mount
+      fetch('https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json')
+        .then((response) => response.json())
+        .then((data) => setProvinces(data))
+        .catch((error) => console.error('Error fetching provinces:', error));
+    }, []);
+    const selectedProvinceData = provinces.find((province) => province.id === selectedProvince);
+    const selectedProvinceName = selectedProvinceData ? selectedProvinceData.name : '';
+    
+    const selectedRegencyData = regencies.find((regency) => regency.id === selectedRegency);
+    const selectedRegencyName = selectedRegencyData ? selectedRegencyData.name : '';
+    
+    const selectedDistrictData = districts.find((district) => district.id === selectedDistrict);
+    const selectedDistrictName = selectedDistrictData ? selectedDistrictData.name : '';
+
+    const selectedVillageData = villages.find((village) => village.id === selectedVillage);
+    const selectedVillageName = selectedVillageData ? selectedVillageData.name : '';
+  
+    const handleProvinceChange = (provinceId) => {
+        setSelectedProvince(provinceId); 
+        setRegencies([]);
+        setDistricts([]); 
+        setVillages([]);    
+        // Fetch regencies based on selected province
+        fetch(`https://emsifa.github.io/api-wilayah-indonesia/api/regencies/${provinceId}.json`)
+          .then((response) => response.json())
+          .then((data) => setRegencies(data))
+          .catch((error) => console.error('Error fetching regencies:', error));
+      };
+  
+    const handleRegencyChange = (regencyId) => {
+      setSelectedRegency(regencyId);
+      setDistricts([]); // Atur ulang nilai districts menjadi array kosong
+      setVillages([]);   
+      // Fetch districts based on selected regency
+      fetch(`https://emsifa.github.io/api-wilayah-indonesia/api/districts/${regencyId}.json`)
+        .then((response) => response.json())
+        .then((data) => setDistricts(data))
+        .catch((error) => console.error('Error fetching districts:', error));
+    };
+  
+    const handleDistrictChange = (districtId) => {
+      setSelectedDistrict(districtId);
+      setVillages([]); 
+      // Fetch villages based on selected district
+      fetch(`https://emsifa.github.io/api-wilayah-indonesia/api/villages/${districtId}.json`)
+        .then((response) => response.json())
+        .then((data) => setVillages(data))
+        .catch((error) => console.error('Error fetching villages:', error));
+    };
+
     return (
         <View flex={1} bg={"#f7f6fd"} alignContent={"center"} px={10} pt={20}>
             <TouchableOpacity title="Back to Landing" onPress={handleBack}><Text marginBottom={50} marginTop={-30} ><Ionicons name="arrow-back-outline" size={32} color="#373248" /><Text/></Text></TouchableOpacity> 
@@ -96,6 +172,12 @@ const Register =() => {
                         value={username}
                         onChangeText={(username) => setUsername(username)}
                         placeholder="Enter Your Username"/>
+                        <FormControl.Label>Email</FormControl.Label>
+                        <Input
+                        value={email}
+                        onChangeText={(email) => setEmail(email)}
+                        placeholder="Enter Your Email"
+                        w={"full"}/>
                     <FormControl.Label>Password</FormControl.Label>
                         <Input
                         value={password}
@@ -107,12 +189,7 @@ const Register =() => {
                             Password should be at least 6 characters long.
                         </Text>
                         )}
-                    <FormControl.Label>Email</FormControl.Label>
-                        <Input
-                        value={email}
-                        onChangeText={(email) => setEmail(email)}
-                        placeholder="Enter Your Email"
-                        w={"full"}/>
+
                     <FormControl.Label>No Telp</FormControl.Label>
                         <Input
                         value={telp}
@@ -121,6 +198,56 @@ const Register =() => {
                         keyboardType="phone-pad"
                         w={"full"}/>
                     <FormControl.Label>Alamat</FormControl.Label>
+                    <FormControl.Label marginLeft={3}>Provinsi</FormControl.Label>
+                    <Select
+                    placeholder="Select Province"
+                    selectedValue={selectedProvince}
+                    onValueChange={(value) => handleProvinceChange(value)}
+                    >
+                    {provinces.map((province) => (
+                        <Select.Item label={province.name} value={province.id} key={province.id} />
+                    ))}
+                    </Select>
+
+                    {/* Select for Regencies */}
+                    <FormControl.Label marginLeft={3}>Kabupaten/Kota</FormControl.Label>
+                    <Select
+                    placeholder="Select Regency"
+                    selectedValue={selectedRegency}
+                    onValueChange={(value) => handleRegencyChange(value)}
+                    disabled={!selectedProvince} // Disable when no province is selected
+                    >
+                    {regencies.map((regency) => (
+                        <Select.Item label={regency.name} value={regency.id} key={regency.id} />
+                    ))}
+                    </Select>
+
+                    {/* Select for Districts */}
+                    <FormControl.Label marginLeft={3}>Kecamatan</FormControl.Label>
+                    <Select
+                    placeholder="Select District"
+                    selectedValue={selectedDistrict}
+                    onValueChange={(value) => handleDistrictChange(value)}
+                    disabled={!selectedRegency} // Disable when no regency is selected
+                    >
+                    {districts.map((district) => (
+                        <Select.Item label={district.name} value={district.id} key={district.id} />
+                    ))}
+                    </Select>
+
+                    {/* Select for Villages */}
+                    <FormControl.Label marginLeft={3}>Desa</FormControl.Label>
+                    <Select
+                    placeholder="Select Village"
+                    selectedValue={selectedVillage}
+                    onValueChange={(value) => setSelectedVillage(value)}
+                    disabled={!selectedDistrict} // Disable when no district is selected
+                    >
+                    {villages.map((village) => (
+                        <Select.Item label={village.name} value={village.id} key={village.id} />
+                    ))}
+                    </Select>          
+                    <FormControl.Label>Alamat Lengkap</FormControl.Label>
                         <Input
                         value={alamat}
                         onChangeText={(alamat) => setAlamat(alamat)}
