@@ -1,59 +1,102 @@
-import React from 'react';
-import { Box, VStack, HStack, Center, ScrollView } from 'native-base';
+// Di halaman ListImage
+import React, { useState } from 'react';
+import { Box, ScrollView, FlatList, Image } from 'native-base';
+import { Dimensions, TouchableOpacity } from 'react-native';
 import { Header } from '../components';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  Easing
+} from 'react-native-reanimated';
 
-const ListImage = () => {
+
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+
+const ListImage = ({ route }) => {
+  const { evidence: orderEvidence } = route.params;
+  const scale = useSharedValue(1);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const imageStyles = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: withTiming(scale.value, { duration: 250, easing: Easing.inOut(Easing.ease) }) }],
+    };
+  });
+
+  const handleImagePress = (imageUrl) => {
+    setSelectedImage(imageUrl);
+  };
+
+  const closeImage = () => {
+    setSelectedImage(null);
+    scale.value = 1; 
+  };
+
   return (
     <>
       <Box bg="#82a9f4">
-        <Box mb={10}>
-          <Header withBack="true" title={'Detail Image'} />
-        </Box>
+        <Header withBack="true" title={'Detail Image'} />
       </Box>
-      <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
-        <VStack mb={10} mt={10} space={30} justifyContent="center" alignItems="center">
-          <HStack space={30}>
-            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
-              Gambar 1
-            </Center>
-            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
-              Gambar 2
-            </Center>
-          </HStack>
-          <HStack space={30}>
-            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
-              Gambar 3
-            </Center>
-            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
-              Gambar 4
-            </Center>
-          </HStack>
-          <HStack space={30}>
-            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
-              Gambar 5
-            </Center>
-            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
-              Gambar 6
-            </Center>
-          </HStack>
-          <HStack space={30}>
-            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
-              Gambar 7
-            </Center>
-            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
-              Gambar 8
-            </Center>
-          </HStack>
-          <HStack space={30}>
-            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
-              Gambar 9
-            </Center>
-            <Center h="40" w="40" bg="muted.300" rounded="md" shadow={3}>
-              Gambar 10
-            </Center>
-          </HStack>
-        </VStack>
-      </ScrollView>
+      <FlatList
+        data={orderEvidence}
+        renderItem={({ item: imageUrl, index }) => (
+          <TouchableOpacity onPress={() => handleImagePress(imageUrl)} style={{ margin: 10}}>
+            <Box
+            shadow={2}
+            bg="white"
+            borderRadius={10}
+            >           
+            <Image
+              source={{ uri: imageUrl }}
+              resizeMode="cover"
+              alt='hahaa'
+              style={{
+                width: 160,
+                height: 160,
+                borderRadius: 10,
+              }}
+            />  
+            </Box>         
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={2}
+        contentContainerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 10,
+        }}
+      />
+
+      {selectedImage && (
+        <TouchableOpacity
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: screenWidth,
+            height: screenHeight,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          }}
+          onPress={closeImage}
+        >
+          <Animated.Image
+            source={{ uri: selectedImage }}
+            resizeMode="contain"
+            style={[
+              {
+                width: screenWidth,
+                height: screenHeight,
+              },
+              imageStyles,
+            ]}
+          />
+        </TouchableOpacity>
+      )}
+
     </>
   );
 };

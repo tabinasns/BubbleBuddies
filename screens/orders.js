@@ -1,186 +1,264 @@
+import React, { useState, useEffect, useRef } from "react";
+import { StyleSheet, SafeAreaView, } from 'react-native';
+import PagerView from 'react-native-pager-view';
+import { Box, Button, HStack, Heading, Image, Text, FlatList, Spinner } from "native-base";
+import { Header } from '../components';
 import { useNavigation } from "@react-navigation/native";
-import { Box, Button, HStack, Heading, Image, ScrollView, Text, Modal } from "native-base";
-import React, { useState, useEffect } from "react";
-import { Header } from "../components";
-import DataOrder from "../DataOrder";
-import { TouchableOpacity, ActivityIndicator, RefreshControl, Animated, useWindowDimensions  } from "react-native";
-
-
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getData } from "../src/utils";
+import { getOrder } from "../src/actions/AuthAction";
 
 const Orders = () => {
-  const navigation = useNavigation();
-  const [showModal, setShowModal] = useState(false);
+    const navigation = useNavigation();
+    const [data, setData] = useState(null); 
+    const [loading, setLoading] = useState(true); 
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            setData(orderData);
+          } catch (error) {
+            console.error('Data Tidak Ditemukan', error);
+          }
+        };
+    
+        fetchData();
+      }, []);
+    
+    
+      const [orderData, setOrderData] = useState([]);
+      
+      useEffect(() => {
+        const fetchOrderData = async () => {
+          try {
+            const userData = await getData('user');
+            const userId = userData.uid;
+            const fetchedOrder = await getOrder(userId);
+            if (fetchedOrder) {
+              const orders = Object.entries(fetchedOrder).map(([orderId, orderData]) => ({
+                orderId,
+                ...orderData,
+              }));
+              setOrderData(orders);
+              setLoading(false);
+            }
+          } catch (error) {
+            console.error('Error fetching order data:', error);
+          }
+        };
+      
+        const interval = setInterval(() => {
+          fetchOrderData();
+        }, 1000); 
+        return () => clearInterval(interval);
+      }, []);
+  const pages = [
+    { key: 'page1', text: 'Active', content: 
+    <Box>
+    {loading ? (
+      <Spinner size="lg" color="#82a9f4" />
+    ) : (
+      <FlatList
+      data={orderData.filter((orderItem) => orderItem.status === 0)}
+      renderItem={({ item: orderItem, index: orderIndex }) => {
+        let serviceImage = '';
 
-  const [data, setData] = useState(null); 
-  const [loading, setLoading] = useState(true); 
-  
-  const handleButtonPress = () => {
-    navigation.navigate('DetailOrder'); 
-  };
-
-  const [scrollY] = useState(new Animated.Value(0));
-  const window = useWindowDimensions();
-  const scrollContentHeight = 1000;
-
-  const buttonStyle = {
-    backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderColor: '#82a9f4', 
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-    borderRadius: 0,
-  };
-
-  const textStyle = {
-    color: '#82a9f4',
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setData(DataOrder);
-        setLoading(false);
-      } catch (error) {
-        console.error('Data Tidak Ditemukan', error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const calculateTotalHarga = (order) => {
-    if (!order || !order.barang || order.barang.length === 0) {
-      return 0;
-    }
-
-    return order.barang.reduce((total, item) => {
-      const harga = parseFloat(item.harga);
-      return isNaN(harga) ? total : total + harga;
-    }, 0)
-  };
-
-  const [refreshing, setRefreshing] = useState(false);
-  const onRefresh = () => {
-    setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000); 
-  };
-  
-  return (
-    <>
-      <Box py={"4"} bg="#82a9f4">
-        <Animated.View  style={{
-          height: scrollY.interpolate({
-            inputRange: [scrollContentHeight - window.height, scrollContentHeight],
-            outputRange: [200, 0],
-            extrapolate: 'clamp',
-          }),
-        }} >
-        <Box mb={10}>
-        <Header scrollY={scrollY} withBack="true" title={"Orders"} />
-        </Box>
-        </Animated.View>
-      </Box>
-      <Box py={"5"} bg="#f6f6f6" w={"full"} borderRadius={"40"} top={"-40"} pt={"5"} pl={"10"} pr={"10"} pb={"5"}>
-        <Box alignItems="flex-start" mt={5} ml={8}>
-        <Button
-          style={buttonStyle}>
-            <Text style={textStyle}>Active</Text>
-        </Button>
-        </Box>
-        <Box alignItems="flex-end" top={-30} mr={8}>
-          <TouchableOpacity onPress={() => setShowModal(true)}>
-            <Text>
-              Completed
-            </Text>
-          </TouchableOpacity>
-        </Box>
-        {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : (
-        
-        <ScrollView vertical={true}  
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: false }
-        )}
-        scrollEventThrottle={5}
-        showsVerticalScrollIndicator={false} marginBottom={250}  refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
+        switch (orderItem.service) {
+          case 'Wash & Iron':
+            serviceImage = require('../assets/washIron.png');
+            break;
+          case 'Wash':
+            serviceImage = require('../assets/wash.png');
+            break;
+          case 'Ironing':
+            serviceImage = require('../assets/iron.png');
+            break;
+          default:
+            serviceImage = '';
+            break;
         }
-        >
-          {data && data.map((item) => (
-            <Box key={item.id} p={"3"} bgColor="white" borderRadius={"10"} mt={"2"} mb={"2"} shadow={2}>
-              <HStack>
-                <Image 
-                  source={{ uri: item.image }}
-                  alt="Gambar"
-                  size={"70"}
-                  mr={"2"}
-                />
-                <Heading p={"3"} fontSize={20} lineHeight={"25"}>
-                  {item.orderan} {"\n"}
-                  <Text fontSize={"15"} fontWeight={"500"}>{item.tanggal}{"\n"}</Text>
-                  <Text fontSize={"15"} fontWeight={"500"}>Rp {calculateTotalHarga(item)}</Text>
-                </Heading>
-              </HStack>
-              <Button key={item.id} onPress={() => navigation.navigate('DetailOrder', { item })} style={{ backgroundColor: "#82a9f4" }}>Order Details</Button>
-            </Box>
-          ))}
-        </ScrollView>
-      )}
-      </Box>
-      <Modal isOpen={showModal} justifyContent="flex-end" bottom="0" size="full" onClose={() => setShowModal(false)}>
-      <Modal.Content h={"full"} bg={"#f6f6f6"} py={30} borderTopRadius={40}>
-        
-        <Box alignItems="flex-start" mt={5} ml={83}>
-          <TouchableOpacity
-            onPress={() => {
-            setShowModal(false);
-            }}
-           >
-            <Text>
-              Active
-            </Text>
-          </TouchableOpacity>
-        </Box>
-        <Box alignItems="flex-end" top={-30} mr={60}>
-          <Button
-          style={buttonStyle}>
-            <Text style={textStyle}>Completed</Text>
-        </Button>
-        </Box>
-          <Modal.Body px={41}>
-          {DataOrder.map((item) => (
-          <Box key={item.id} p={"3"} bgColor="white" borderRadius={"10"} mt={"2"} mb={"2"} shadow={2}>
+
+        return (
+          <Box key={orderIndex} p={"3"} bgColor="white" borderRadius={"10"} shadow="2" marginBottom={5}>
             <HStack>
               <Image 
-                source={{ uri: item.image }}
-                alt="Gambar"
-                size={"70"}
-                mr={"2"}
+                source={serviceImage}
+                alt="Alternate Text"
+                size={"79"}
+                mr={"1"}
               />
               <Heading p={"3"} fontSize={"20"} lineHeight={"25"}>
-                {item.orderan} {"\n"}
-                <Text fontSize={"15"} fontWeight={"500"}>{item.tanggal}{"\n"}</Text>
-                <Text fontSize={"15"} fontWeight={"500"}>Rp </Text>
-              </Heading>
+                Order #{orderItem.orderNumber}{"\n"}
+                <Text fontSize={"15"} fontWeight={"500"}>{orderItem.date}{"\n"}</Text>
+                <Text fontSize={"15"} fontWeight={"500"}>Rp {orderItem.total}</Text>
+              </Heading>             
             </HStack>
-            <Button onPress={handleButtonPress} style={{backgroundColor: "#82a9f4"}}>Order Details</Button>
+            <Button onPress={() => navigation.navigate('DetailOrder', { 
+              orderService: orderItem.service, 
+              orderTotal: orderItem.total, 
+              orderProducts: orderItem.products,
+              orderNumber: orderItem.orderNumber,
+              orderStatus: orderItem.status,
+              orderId: orderItem.orderId,
+              orderEvidence: orderItem.evidence
+            })} style={{ backgroundColor: "#82a9f4" }}>Order Details</Button>
           </Box>
-          ))}
-          </Modal.Body>
-        </Modal.Content>
-      </Modal>
-    </>
+        );
+      }}
+      keyExtractor={(item, index) => index.toString()}
+      showsVerticalScrollIndicator={false}
+    />      
+    )}
+  </Box>  },
+    { key: 'page2', text: 'Complete',
+    content: 
+    <Box>
+    {loading ? (
+      <Spinner size="lg" color="#82a9f4" />
+    ) : (
+      <FlatList
+      data={orderData.filter((orderItem) => orderItem.status === 1)}
+      renderItem={({ item: orderItem, index: orderIndex }) => {
+        let serviceImage = '';
+
+        switch (orderItem.service) {
+          case 'Wash & Iron':
+            serviceImage = require('../assets/washIron.png');
+            break;
+          case 'Wash':
+            serviceImage = require('../assets/wash.png');
+            break;
+          case 'Ironing':
+            serviceImage = require('../assets/iron.png');
+            break;
+          default:
+            serviceImage = '';
+            break;
+        }
+
+        return (
+          <Box key={orderIndex} p={"3"} bgColor="white" borderRadius={"10"} shadow="2" marginBottom={5}>
+            <HStack>
+              <Image 
+                source={serviceImage}
+                alt="Alternate Text"
+                size={"79"}
+                mr={"1"}
+              />
+              <Heading p={"3"} fontSize={"20"} lineHeight={"25"}>
+                Order #{orderItem.orderNumber}{"\n"}
+                <Text fontSize={"15"} fontWeight={"500"}>{orderItem.date}{"\n"}</Text>
+                <Text fontSize={"15"} fontWeight={"500"}>Rp {orderItem.total}</Text>
+              </Heading>             
+            </HStack>
+            <Button onPress={() => navigation.navigate('DetailOrder', { 
+              orderService: orderItem.service, 
+              orderTotal: orderItem.total, 
+              orderProducts: orderItem.products,
+              orderNumber: orderItem.orderNumber,
+              orderStatus: orderItem.status,
+              orderId: orderItem.orderId,
+              orderEvidence: orderItem.evidence
+            })} style={{ backgroundColor: "#82a9f4" }}>Order Details</Button>
+          </Box>
+        );
+      }}
+      keyExtractor={(item, index) => index.toString()}
+      showsVerticalScrollIndicator={false}
+    />      
+    )}
+  </Box> }
+  ];
+  const [activePage, setActivePage] = React.useState(0);
+
+  const changePage = (pageIndex) => {
+    setActivePage(pageIndex);
+    pagerRef.current.setPage(pageIndex);
+  };
+
+  const renderTabs = () => {
+      const buttonStyle = {
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderColor: '#82a9f4', 
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        borderRadius: 0,
+      };
+
+      const buttonStyleTwo = {
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderColor: "transparent",
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        borderRadius: 0,
+        color: 'white',
+      };
+      const textStyle = {
+        color: '#82a9f4',
+      };
+      const textStyleTwo = {
+        color: 'black',
+      };
+
+
+    return (
+        <>
+        <Box backgroundColor={"#82a9f4"} width={"full"} height={200} >
+            <Header withBack={true} title={"Orders"} /> 
+        </Box>
+        <Box bg="#f6f6f6" w={"full"} marginTop={-50} borderRadius={"40"} pt={"5"} pl={"10"} pr={"10"} pb={"5"}>
+        <HStack space={100} style={{
+        backgroundColor: '#f6f6f6',
+        alignSelf: 'center',
+        alignItems: 'center',
+        marginTop:15,
+        }}
+        >
+        {pages.map((page, index) => (
+          <Button
+            key={index}
+            style={[
+                activePage === index ? buttonStyle : buttonStyleTwo,
+              ]}
+            onPress={() => changePage(index)}
+          >
+            <Text style={activePage === index  ? textStyle : textStyleTwo}>{page.text}</Text>
+          </Button>
+        ))}
+        </HStack>
+        </Box>
+        </>
+    );
+  };
+
+  const pagerRef = useRef(null);
+
+  return (
+    
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#f6f6f6', }}>
+        
+      {renderTabs()}
+      <PagerView
+        ref={pagerRef}
+        style={{ flex: 1, }}
+        initialPage={activePage}
+        onPageSelected={(event) => {
+        setActivePage(event.nativeEvent.position);
+        }}
+      >
+        {pages.map((page, index) => (
+        <Box key={index} px={10} >
+            <Box>
+                <Box>{page.content}</Box>
+            </Box>
+        </Box>
+  ))}
+      </PagerView>
+    </SafeAreaView>
   );
-};
+}
 
 export default Orders;
