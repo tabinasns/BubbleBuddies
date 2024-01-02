@@ -3,9 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { NativeBaseProvider, Text } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Home from "./screens/home";
 import Profile from "./screens/profile";
-import Order from "./screens/orders";
 import DetailProfile from "./screens/detail-profile";
 import AboutUs from "./screens/about-us";
 import AddService from "./screens/add-service";
@@ -16,10 +14,11 @@ import SuccesOrder from "./screens/succes-order";
 import Landing from "./screens/landing";
 import Login from "./screens/login";
 import Register from "./screens/register";
-import Lupa from "./screens/lupapswd";
 import DetailOrder from "./screens/detail-order";
 import ListImage from "./screens/list-image";
-
+import Splash from "./screens/splash";
+import Orders from "./screens/orders";
+import Home from "./screens/home";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -68,7 +67,7 @@ const Tabs = () => {
       })}
     >
       <Tab.Screen name="Home" component={Home} options={noHead} />
-      <Tab.Screen name="Order" component={Order} options={noHead} />
+      <Tab.Screen name="Orders" component={Orders} options={noHead} />
       <Tab.Screen name="Profile" component={Profile} options={noHead} />
     </Tab.Navigator>
   );
@@ -78,22 +77,22 @@ const App = () => {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Landing">
+        <Stack.Navigator initialRouteName="Splash">
           <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
           <Stack.Screen name="DetailProfile" component={DetailProfile} options={noHead} />
           <Stack.Screen name="AboutUs" component={AboutUs} options={noHead} />
           <Stack.Screen name="AddService" component={AddService} options={noHead} />
           <Stack.Screen name="AddList" component={AddList} options={noHead} />
-          <Stack.Screen name="Home" component={Home} options={noHead} />
           <Stack.Screen name="CheckoutOrder" component={CheckoutOrder} options={noHead} />
           <Stack.Screen name="AddImage" component={AddImage} options={noHead} />
           <Stack.Screen name="SuccesOrder" component={SuccesOrder} options={noHead} />
           <Stack.Screen name="Landing" component={Landing} options={noHead} />
           <Stack.Screen name="Login" component={Login} options={noHead} />
           <Stack.Screen name="Register" component={Register} options={noHead}/>
-          <Stack.Screen name="Lupa" component={Lupa} options={noHead}/>
           <Stack.Screen name="DetailOrder" component={DetailOrder} options={noHead} />
           <Stack.Screen name="ListImage" component={ListImage} options={noHead} />
+          <Stack.Screen name="Splash" component={Splash} options={noHead} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
