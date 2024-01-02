@@ -111,10 +111,12 @@ const AddList = () => {
 
   return (
     <>
-      <Header title={"Add List"} withBack={true} />
+        <Box backgroundColor={"#82a9f4"} width={"full"} height={200} >
+            <Header withBack={true} title={"Add List"} /> 
+        </Box>
       <Box py={"4"} bg="#82a9f4">
-        <Box py={"5"} bg="#f6f6f6" w={"full"} borderRadius={"40"} mt={"30"} pt={"10"} pl={"10"} pr={"10"} pb={"30"} mb={"20"}>
-          <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
+        <Box py={"5"} bg="#f6f6f6" w={"full"} borderRadius={"40"} mt={"-30"} pt={"10"} pl={"10"} pr={"10"} pb={"150"} mb={"20"}>
+          <ScrollView vertical={true} showsVerticalScrollIndicator={false} >
             <Box>
             {defaultProducts.map((product, index) => (
             <FormControl key={index}>
@@ -132,17 +134,17 @@ const AddList = () => {
                   </Box>
                   <VStack>
                     <Box flex={1.8}>
-                      <Heading pl={"6"} pt={"3"} fontWeight={"800"} mt={"5"}>
+                      <Heading pl={"3"} pt={"3"} fontWeight={"800"} mt={"5"}>
                       {product.name}
                       </Heading>
                     </Box>
                     <Box>
-                      <Text fontSize={"sm"} pl={"6"} pb={"6"}>
+                      <Text fontSize={"sm"} pl={"3"} pb={"6"}>
                         Rp {product.price} /pcs
                       </Text>
                     </Box>
                   </VStack>
-                  <HStack pl={"6"} pt={"45"}>
+                  <HStack pl={"3"} pt={"45"}>
                     <TouchableOpacity activeOpacity={0.8}  onPress={() => decrementQuantity(index)}>
                       <Ionicons name="remove-circle-outline" size={20} color="#82a9f4" />
                     </TouchableOpacity>
