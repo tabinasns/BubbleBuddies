@@ -1,31 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, SafeAreaView, } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { Box, Button, HStack, Heading, Image, Text, FlatList, Spinner } from "native-base";
 import { Header } from '../components';
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getData } from "../src/utils";
 import { getOrder } from "../src/actions/AuthAction";
 
 const Orders = () => {
     const navigation = useNavigation();
-    const [data, setData] = useState(null); 
     const [loading, setLoading] = useState(true); 
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            setData(orderData);
-          } catch (error) {
-            console.error('Data Tidak Ditemukan', error);
-          }
-        };
-    
-        fetchData();
-      }, []);
-    
-    
-      const [orderData, setOrderData] = useState([]);
+    const [orderData, setOrderData] = useState([]);
       
       useEffect(() => {
         const fetchOrderData = async () => {
@@ -51,6 +36,7 @@ const Orders = () => {
         }, 1000); 
         return () => clearInterval(interval);
       }, []);
+
   const pages = [
     { key: 'page1', text: 'Active', content: 
     <Box>
