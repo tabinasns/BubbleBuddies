@@ -14,35 +14,30 @@ const AddList = () => {
       price: 3000 ,
       image: "https://i.pinimg.com/originals/42/04/cb/4204cbbc687d47fda5a66561da4935a9.png",
       quantity: 0,
-      evidence: [],
     },
     { 
       name: 'Blanket', 
       price: 6000 ,
       image: "https://i.pinimg.com/736x/b9/63/ae/b963ae7da4aaeea35cbbd94bb5109e72.jpg",
       quantity: 0,
-      evidence: [],
     },
     { 
       name: 'Blazer', 
       price: 5000 ,
       image: "https://i.pinimg.com/736x/5e/6b/7d/5e6b7d8cd5489b67dc542a10c3406bc9.jpg",
       quantity: 0,
-      evidence: [],
     },
     { 
       name: 'Jacket', 
       price: 3000 ,
       image: "https://i.pinimg.com/originals/94/f9/b3/94f9b3818464bd292bc24a3a8acf067a.png",
       quantity: 0,
-      evidence: [],
     },
     { 
       name: 'Bottom', 
       price: 4000 ,
       image: "https://i.pinimg.com/originals/3c/74/58/3c7458869ee918b90f5649a44d41f46f.png",
       quantity: 0,
-      evidence: [],
     },
   ]);
 
