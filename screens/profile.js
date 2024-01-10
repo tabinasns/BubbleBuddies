@@ -22,7 +22,7 @@ const Profile = () => {
     getData("user").then((res) => {
       const data = res;
       if (data) {
-        setProfile(data);
+        setProfile(data); 
       } else {
         // navigation.replace('Login');
       }

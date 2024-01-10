@@ -1,7 +1,7 @@
 import React from 'react';
 import { Heading, Box, HStack, Text, View, ScrollView, Button } from "native-base";
-import { useNavigation, route } from "@react-navigation/native";
-import { TouchableOpacity, FlatList, RefreshControl } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native";
 import { Header } from "../components"
 import { editOrder } from '../src/actions/AuthAction';
 import { useState } from 'react';
